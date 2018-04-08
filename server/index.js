@@ -10,7 +10,7 @@ app.use(morgan('dev'));
 
 // static middleware for files in /public
 const path = require('path');
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public/assets/')));
 
 // parsing middleware
 const bodyParser = require('body-parser');

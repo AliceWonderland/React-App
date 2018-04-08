@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
 import { appStore } from './store';
-import '../public/styles.scss';
+import '../public/assets/styles/styles.scss';
 
 import { Header, Footer, Main } from './components';
 

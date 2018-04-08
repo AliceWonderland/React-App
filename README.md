@@ -1,9 +1,9 @@
 # React APP
-Barebones Skeleton for a quickstart react-app. That you can configure! A slight step up from Create-React-App!
+Barebones Skeleton for a quickstart react-app. That you can configure! A slight step up from [Create-React-App](https://github.com/facebook/create-react-app)!
 
 Organized in a simple way as to allow beginners to begin using it easily for simple applications.
 
-Flexible enough to be customized for more complex production-style applications.
+Flexible enough to be customized for more complex production applications or just to configure and installing your choice of packages and tooling.
 
 This and all my react projects use ES6. https://babeljs.io/blog/2015/06/07/react-on-es6-plus
 
