@@ -17,7 +17,7 @@ class Header extends Component {
 		if(page==='giphy'){
 			this.setState({page:'Giphy',linkName:'Reddit'});
 		}else{
-			this.setState({page:'Reddit',linkName:'Giphy'});
+			this.setState({page:'Skeleton',linkName:'Sample'});
 		}
 	}
 
@@ -25,7 +25,7 @@ class Header extends Component {
 		if(page==='giphy'){
 			this.setState({page:'Reddit',linkName:'Giphy'});
 		}else{
-			this.setState({page:'Giphy',linkName:'Reddit'});
+			this.setState({page:'Skeleton',linkName:'Sample'});
 		}
 	}
 
@@ -34,13 +34,13 @@ class Header extends Component {
 		let linkName=this.state.linkName;
 		return (
 		  <header className="App-header">
+			  <i className="fas fa-thumbs-up fa-5x"></i>
+			  <h1>Hello, {page}!</h1>
 			  <nav>
 				  <Link to={`/${linkName.toLowerCase()}`} onClick={this.handleClick}>
-					  {linkName} <i className="fa fa-arrow-right" aria-hidden="true"></i>
+					  {linkName} <i className="fas fa-arrow-right" aria-hidden="true"></i>
 				  </Link>
 			  </nav>
-			  <i className={(page==='Giphy' ? 'fa fa-picture-o fa-6' : 'fa fa-reddit-alien fa-6')} aria-hidden="true"></i>
-			  <h1 className="App-title">Hello, {page}!</h1>
 		  </header>
 		);
 	}

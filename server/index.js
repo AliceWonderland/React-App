@@ -18,17 +18,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // routing
+
 const router = require('express').Router();
+const routesApi = require('./api');
+app.use('/api', routesApi);
 
-//api root
-router.get('/api', function (req, res, next) {
-	res.send('api root');
-});
-
-// /api/giphy
-router.get('/campuses', function (req, res, next) {
-	res.send('something');
-});
 // end routing
 
 
