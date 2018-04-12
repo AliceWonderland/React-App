@@ -6,9 +6,9 @@ import { PropTypes } from 'prop-types';
 import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
 import { appStore } from './store';
-import '../public/assets/styles/styles.scss';
+import '../public/styles.scss';
 
-import { Header, Footer, Main } from './components';
+import { Header, Footer, Main, TicTacToe } from './components';
 
 let store = createStore(appStore);
 import { history } from './history.js';
@@ -20,7 +20,7 @@ ReactDOM.render(
 			  <Header path={window.location.href} />
 			  <Switch>
 				  <Route exact path="/" component={Main} />
-				  <Route exact path="/giphy" component={Main} />
+				  <Route exact path="/tictactoe" component={TicTacToe} />
 				  <Route exact path="/reddit" component={Main} />
 				  <Route component={Main} />
 				  <Route path='*' component={Main} />

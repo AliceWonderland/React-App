@@ -13,7 +13,7 @@ class Footer extends Component {
 	render() {
 		return (
 		  <footer>
-			  <p>Footer</p>
+			  <p>Source Code available on <a href="https://github.com/AliceWonderland/React-App" target="_blank" rel="noopener">Github</a></p>
 		  </footer>
 		);
 	}

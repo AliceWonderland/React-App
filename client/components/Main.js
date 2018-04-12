@@ -13,14 +13,14 @@ class Main extends Component {
 
 	render() {
 		return (
-		  <section>
+		  <main>
 			  <h1>MAIN</h1>
 			  <i class="fab fa-accessible-icon"></i>
 			  <i class="fas fa-camera-retro"></i>
 			  <i class="fas fa-user"></i>
 			  <i class="far fa-user"></i>
 			  <i class="fab fa-github-square"></i>
-		  </section>
+		  </main>
 		);
 	}
 }

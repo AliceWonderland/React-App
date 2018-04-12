@@ -1,0 +1,60 @@
+* {
+  font-family: Arial, Helvetica, sans-serif; }
+
+*, *:before, *:after {
+  box-sizing: border-box; }
+
+body,
+input,
+button,
+select,
+textarea {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  /*overflow: hidden;*/
+  /*overflow-y: auto;*/ }
+
+header, main, section, footer {
+  padding: 10px 30px; }
+
+.App-header {
+  background-color: #222;
+  height: 230px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.App-header nav a {
+  color: #fff;
+  margin: 10px; }
+
+.tic-tac-toe .game-board {
+  width: 400px;
+  height: 400px;
+  border: 1px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  flex-dirextion: row;
+  align-items: center;
+  justify-content: center; }
+
+.tic-tac-toe .game-board div {
+  background-color: #ccc;
+  border: 1px solid red;
+  flex: 1 1 33%; }
+
+.tic-tac-toe .game-board .box {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap; }
+
+.tic-tac-toe .game-board .box > * {
+  flex: 1 1 80px; }

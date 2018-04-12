@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Nav } from '../components';
 
 class Header extends Component {
 	constructor(props){
@@ -36,11 +37,7 @@ class Header extends Component {
 		  <header className="App-header">
 			  <i className="fas fa-thumbs-up fa-5x"></i>
 			  <h1>Hello, {page}!</h1>
-			  <nav>
-				  <Link to={`/${linkName.toLowerCase()}`} onClick={this.handleClick}>
-					  {linkName} <i className="fas fa-arrow-right" aria-hidden="true"></i>
-				  </Link>
-			  </nav>
+			  <Nav/>
 		  </header>
 		);
 	}
