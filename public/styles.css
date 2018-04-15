@@ -38,23 +38,32 @@ header, main, section, footer {
 .tic-tac-toe .game-board {
   width: 400px;
   height: 400px;
-  border: 1px solid red;
+  border: 1px solid #292528;
   display: flex;
   flex-wrap: wrap;
-  flex-dirextion: row;
-  align-items: center;
-  justify-content: center; }
+  flex-direction: row; }
 
 .tic-tac-toe .game-board div {
-  background-color: #ccc;
-  border: 1px solid red;
-  flex: 1 1 33%; }
+  background-color: #e0e0e0;
+  border: 1px solid #bbbaba;
+  flex: 1 1 33%;
+  flex-shrink: 1;
+  display: flex;
+  min-height: 33%;
+  justify-content: center;
+  font-size: 7em;
+  color: #564d4d; }
 
-.tic-tac-toe .game-board .box {
+.tic-tac-toe .game-board div:hover {
+  background-color: #ccc;
+  cursor: pointer; }
+
+.tic-tac-toe .box {
+  width: 50%;
   height: 300px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap; }
 
-.tic-tac-toe .game-board .box > * {
+.tic-tac-toe .box > * {
   flex: 1 1 80px; }

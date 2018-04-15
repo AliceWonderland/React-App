@@ -18,11 +18,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // routing
-
 const router = require('express').Router();
 const routesApi = require('./api');
 app.use('/api', routesApi);
-
 // end routing
 
 

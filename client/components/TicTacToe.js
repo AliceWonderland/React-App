@@ -6,23 +6,13 @@ class TicTacToe extends Component {
 		super(props);
 		this.state = {
 			player: 'x',
+			winner: 'x',
 			board: [
 				{id: 1, value: null, state: 0}, {id: 2, value: null, state: 0}, {id: 3, value: null, state: 0},
 				{id: 4, value: null, state: 0}, {id: 5, value: null, state: 0}, {id: 6, value: null, state: 0},
 				{id: 7, value: null, state: 0}, {id: 8, value: null, state: 0}, {id: 9, value: null, state: 0}
 			],
-			test: {
-				1: {value: null, state: 0},
-				2: {value: null, state: 0},
-				3: {value: null, state: 0},
-				4: {value: null, state: 0},
-				5: {value: null, state: 0},
-				6: {value: null, state: 0},
-				7: {value: null, state: 0},
-				8: {value: null, state: 0},
-				9: {value: null, state: 0},
-			}
-
+			dimensions: 3
 		};
 		this.handleClick = this.handleClick.bind(this);
 	}
@@ -33,24 +23,14 @@ class TicTacToe extends Component {
 
 	handleClick(e) {
 		console.log('clicked', e, e.target, e.value);
-		let item=e;
-		if(this.state.player==='o'){ return; }
+		let item=e,
+			player=this.state.player,
+			winner=this.state.winner;
 
-		new Promise((resolve,reject) => {
+		if(winner){ this.clearBoard(); return; }
+		if(item.state===1 || player==='o'){ return; } //do not allow clicks
 
-			//set spot
-			this.setSpot(item);
-			resolve();
-
-		}).then(res => {
-			//check winner
-
-			//else
-			setTimeout(() => {
-				console.log('set bot here');
-				this.chooseRandomSpot();
-			}, 1000);
-		});
+		this.setSpot(item);
 	}
 
 	checkWinner(){
@@ -61,13 +41,49 @@ class TicTacToe extends Component {
 		// ----+---+----
 		//   6 | 7 | 8
 		//     |   |
+		let board=this.state.board;
+		let player=this.state.player;
+		let dimensions=this.state.dimensions;
+		console.log('checkwinner', player, board);
+		// manually check combinations
+		// horiz
+		// board[0].value===player && board[1].value===player && board[2].value===player
+		// board[3].value===player && board[4].value===player && board[5].value===player
+		// board[6].value===player && board[7].value===player && board[8].value===player
+
+		// vert
+		// board[0].value===player && board[3].value===player && board[6].value===player
+		// board[1].value===player && board[4].value===player && board[7].value===player
+		// board[2].value===player && board[5].value===player && board[8].value===player
+
+		// diag
+		// board[0].value===player && board[4].value===player && board[8].value===player
+		// board[2].value===player && board[4].value===player && board[6].value===player
+
+		//horiz
+		for(let i=0; i<board.length; i+=dimensions){
+			if(board[i].value===player && board[i+1].value===player && board[i+2].value===player){
+				return player;
+			}
+		}
+		//vert
+		for(let i=0; i<dimensions; i++){
+			if(board[i].value===player && board[i+dimensions].value===player && board[i+dimensions+dimensions].value===player){
+				return player;
+			}
+		}
+		// diag
+		if(board[0].value===player && board[4].value===player && board[8].value===player){
+			return player;
+		}
+		if(board[2].value===player && board[4].value===player && board[6].value===player){
+			return player;
+		}
+		return 0;
 	}
 
 	setSpot(item){
-		console.log('item',item);
 		if(!item.state){
-			// console.log({...item,state:1});
-
 			// set spot
 			let arr=this.state.board.map(ele => {
 				if(ele.id===item.id){
@@ -76,11 +92,26 @@ class TicTacToe extends Component {
 					return ele;
 				}
 			});
-			console.log('set spot',arr);
+			this.setState({board: arr}, () => {
 
-			// change player
-			let player=(this.state.player==='x')? 'o': 'x';
-			this.setState({...this.state, ...{board: arr, player: player}});
+				//check winner
+				let winner=this.checkWinner();
+				console.log('winner is ', winner);
+				if(winner){
+					this.setState({winner: winner});
+					return;
+				}
+
+				let player=(this.state.player==='x')? 'o': 'x';
+				this.setState({player: player}, () => {
+					if(this.state.player==='o'){
+						setTimeout(() => {
+							this.chooseRandomSpot();
+						}, 1000);
+					}
+				});
+
+			});
 		}
 	}
 
@@ -92,11 +123,34 @@ class TicTacToe extends Component {
 		}
 	}
 
+	clearBoard(){
+		let player='x',
+		  	winner= 0,
+			board= [
+				{id: 1, value: null, state: 0}, {id: 2, value: null, state: 0}, {id: 3, value: null, state: 0},
+				{id: 4, value: null, state: 0}, {id: 5, value: null, state: 0}, {id: 6, value: null, state: 0},
+				{id: 7, value: null, state: 0}, {id: 8, value: null, state: 0}, {id: 9, value: null, state: 0}
+			];
+		this.setState({player:player, winner:winner, board:board});
+	}
+
 	render() {
-		console.log(this.state);
+		console.log('render',this.state);
+		let winner=this.state.winner;
 		return (
 		  <main className="tic-tac-toe">
-			  <h1>TIC TAC TOE (<span style={{color: 'red'}}>X Wins!</span>)</h1>
+			  <h1>TIC TAC TOE
+				  {winner ? (
+				    <span>
+					<span style={{color: 'red', 'text-transform': 'capitalize'}}>{winner ? ` (${winner} Wins!)` : ''}</span>
+					<input type="button" onClick={() => this.handleClick(this)} value={`newgame`} defaultValue={`newgame`} />
+					</span>
+				  ) : (
+					''
+				  )
+				  }
+
+			  </h1>
 			  <div className="game-board">
 				  {
 					  this.state.board.map((item, ind) => (
