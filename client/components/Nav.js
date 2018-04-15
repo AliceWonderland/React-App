@@ -24,7 +24,6 @@ class Nav extends Component {
 		return (
 		  <nav>
 			  <Link to="/sample">Home <i className="fas fa-arrow-right" aria-hidden="true"></i></Link>
-			  <Link to="/sample">Robot <i className="fas fa-arrow-right" aria-hidden="true"></i></Link>
 			  <Link to="/tictactoe">Tic Tac Toe <i className="fas fa-arrow-right" aria-hidden="true"></i></Link>
 		  </nav>
 		);

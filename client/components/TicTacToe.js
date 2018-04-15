@@ -6,7 +6,7 @@ class TicTacToe extends Component {
 		super(props);
 		this.state = {
 			player: 'x',
-			winner: 'x',
+			winner: 0,
 			board: [
 				{id: 1, value: null, state: 0}, {id: 2, value: null, state: 0}, {id: 3, value: null, state: 0},
 				{id: 4, value: null, state: 0}, {id: 5, value: null, state: 0}, {id: 6, value: null, state: 0},
@@ -27,59 +27,10 @@ class TicTacToe extends Component {
 			player=this.state.player,
 			winner=this.state.winner;
 
-		if(winner){ this.clearBoard(); return; }
-		if(item.state===1 || player==='o'){ return; } //do not allow clicks
+		if(item==='clear'){ this.clearBoard(); return; } //clear board
+		if(winner || item.state===1 || player==='o'){ return; } //do not allow clicks
 
 		this.setSpot(item);
-	}
-
-	checkWinner(){
-		//     |   |
-		//   0 | 1 | 2
-		// ----+---+----
-		//   3 | 4 | 5
-		// ----+---+----
-		//   6 | 7 | 8
-		//     |   |
-		let board=this.state.board;
-		let player=this.state.player;
-		let dimensions=this.state.dimensions;
-		console.log('checkwinner', player, board);
-		// manually check combinations
-		// horiz
-		// board[0].value===player && board[1].value===player && board[2].value===player
-		// board[3].value===player && board[4].value===player && board[5].value===player
-		// board[6].value===player && board[7].value===player && board[8].value===player
-
-		// vert
-		// board[0].value===player && board[3].value===player && board[6].value===player
-		// board[1].value===player && board[4].value===player && board[7].value===player
-		// board[2].value===player && board[5].value===player && board[8].value===player
-
-		// diag
-		// board[0].value===player && board[4].value===player && board[8].value===player
-		// board[2].value===player && board[4].value===player && board[6].value===player
-
-		//horiz
-		for(let i=0; i<board.length; i+=dimensions){
-			if(board[i].value===player && board[i+1].value===player && board[i+2].value===player){
-				return player;
-			}
-		}
-		//vert
-		for(let i=0; i<dimensions; i++){
-			if(board[i].value===player && board[i+dimensions].value===player && board[i+dimensions+dimensions].value===player){
-				return player;
-			}
-		}
-		// diag
-		if(board[0].value===player && board[4].value===player && board[8].value===player){
-			return player;
-		}
-		if(board[2].value===player && board[4].value===player && board[6].value===player){
-			return player;
-		}
-		return 0;
 	}
 
 	setSpot(item){
@@ -92,16 +43,17 @@ class TicTacToe extends Component {
 					return ele;
 				}
 			});
+
 			this.setState({board: arr}, () => {
 
 				//check winner
 				let winner=this.checkWinner();
-				console.log('winner is ', winner);
 				if(winner){
 					this.setState({winner: winner});
 					return;
 				}
 
+				// change player
 				let player=(this.state.player==='x')? 'o': 'x';
 				this.setState({player: player}, () => {
 					if(this.state.player==='o'){
@@ -123,6 +75,61 @@ class TicTacToe extends Component {
 		}
 	}
 
+	checkWinner(){
+		//     |   |
+		//   0 | 1 | 2
+		// ----+---+----
+		//   3 | 4 | 5
+		// ----+---+----
+		//   6 | 7 | 8
+		//     |   |
+		let board=this.state.board;
+		let player=this.state.player;
+		let dimensions=this.state.dimensions;
+
+		//horiz
+		for(let i=0; i<board.length; i+=dimensions){
+			if(board[i].value===player && board[i+1].value===player && board[i+2].value===player){
+				return player;
+			}
+		}
+		//vert
+		for(let i=0; i<dimensions; i++){
+			if(board[i].value===player && board[i+dimensions].value===player && board[i+dimensions+dimensions].value===player){
+				return player;
+			}
+		}
+		// diag
+		if(board[0].value===player && board[4].value===player && board[8].value===player){
+			return player;
+		}
+		if(board[2].value===player && board[4].value===player && board[6].value===player){
+			return player;
+		}
+
+		// game over
+		let openSpots=this.state.board.filter(ele => !ele.state);
+		if(!openSpots.length){
+			return 'no one';
+		}
+
+		return 0;
+
+		// horiz
+		// board[0].value===player && board[1].value===player && board[2].value===player
+		// board[3].value===player && board[4].value===player && board[5].value===player
+		// board[6].value===player && board[7].value===player && board[8].value===player
+
+		// vert
+		// board[0].value===player && board[3].value===player && board[6].value===player
+		// board[1].value===player && board[4].value===player && board[7].value===player
+		// board[2].value===player && board[5].value===player && board[8].value===player
+
+		// diag
+		// board[0].value===player && board[4].value===player && board[8].value===player
+		// board[2].value===player && board[4].value===player && board[6].value===player
+	}
+
 	clearBoard(){
 		let player='x',
 		  	winner= 0,
@@ -142,8 +149,8 @@ class TicTacToe extends Component {
 			  <h1>TIC TAC TOE
 				  {winner ? (
 				    <span>
-					<span style={{color: 'red', 'text-transform': 'capitalize'}}>{winner ? ` (${winner} Wins!)` : ''}</span>
-					<input type="button" onClick={() => this.handleClick(this)} value={`newgame`} defaultValue={`newgame`} />
+					<span style={{color: 'red', 'text-transform': 'capitalize'}}>{winner ? ` (${winner} Wins!) ` : ''}</span>
+					<input type="button" onClick={() => this.handleClick('clear')} value={`new game`} defaultValue={`new game`} />
 					</span>
 				  ) : (
 					''
