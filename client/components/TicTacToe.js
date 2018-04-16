@@ -5,35 +5,29 @@ class TicTacToe extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			board: [],
+			dimensions: 3,
 			player: 'x',
-			winner: 0,
-			board: [
-				{id: 1, value: null, state: 0}, {id: 2, value: null, state: 0}, {id: 3, value: null, state: 0},
-				{id: 4, value: null, state: 0}, {id: 5, value: null, state: 0}, {id: 6, value: null, state: 0},
-				{id: 7, value: null, state: 0}, {id: 8, value: null, state: 0}, {id: 9, value: null, state: 0}
-			],
-			dimensions: 3
+			winner: 0
 		};
 		this.handleClick = this.handleClick.bind(this);
 	}
 
 	componentDidMount() {
-
+		this.setState({board:this.createBoard()});
 	}
 
-	handleClick(e) {
-		console.log('clicked', e, e.target, e.value);
-		let item=e,
-			player=this.state.player,
-			winner=this.state.winner;
-
-		if(item==='clear'){ this.clearBoard(); return; } //clear board
-		if(winner || item.state===1 || player==='o'){ return; } //do not allow clicks
-
-		this.setSpot(item);
+	createBoard(){
+		let board=[],
+			length=this.state.dimensions*this.state.dimensions;
+		for(let i=1; i<=length; i++){
+			board.push({id:i, value:null, state:0});
+		}
+		return board;
 	}
 
 	setSpot(item){
+		if(!item){return;}
 		if(!item.state){
 			// set spot
 			let arr=this.state.board.map(ele => {
@@ -58,7 +52,7 @@ class TicTacToe extends Component {
 				this.setState({player: player}, () => {
 					if(this.state.player==='o'){
 						setTimeout(() => {
-							this.chooseRandomSpot();
+							this.setSpot(this.chooseRandomSpot());
 						}, 1000);
 					}
 				});
@@ -71,8 +65,9 @@ class TicTacToe extends Component {
 		let openSpots=this.state.board.filter(ele => !ele.state);
 		if(openSpots.length){
 			let randomSpot= openSpots[Math.floor(Math.random()*openSpots.length)];
-			this.setSpot(randomSpot);
+			return randomSpot;
 		}
+		return null;
 	}
 
 	checkWinner(){
@@ -133,12 +128,20 @@ class TicTacToe extends Component {
 	clearBoard(){
 		let player='x',
 		  	winner= 0,
-			board= [
-				{id: 1, value: null, state: 0}, {id: 2, value: null, state: 0}, {id: 3, value: null, state: 0},
-				{id: 4, value: null, state: 0}, {id: 5, value: null, state: 0}, {id: 6, value: null, state: 0},
-				{id: 7, value: null, state: 0}, {id: 8, value: null, state: 0}, {id: 9, value: null, state: 0}
-			];
+			board= this.createBoard();
 		this.setState({player:player, winner:winner, board:board});
+	}
+
+	handleClick(e) {
+		console.log('clicked', e, e.target, e.value);
+		let item=e,
+		  player=this.state.player,
+		  winner=this.state.winner;
+
+		if(item==='clear'){ this.clearBoard(); return; } //clear board
+		if(winner || item.state===1 || player==='o'){ return; } //do not allow clicks
+
+		this.setSpot(item);
 	}
 
 	render() {
