@@ -109,20 +109,6 @@ class TicTacToe extends Component {
 		}
 
 		return 0;
-
-		// horiz
-		// board[0].value===player && board[1].value===player && board[2].value===player
-		// board[3].value===player && board[4].value===player && board[5].value===player
-		// board[6].value===player && board[7].value===player && board[8].value===player
-
-		// vert
-		// board[0].value===player && board[3].value===player && board[6].value===player
-		// board[1].value===player && board[4].value===player && board[7].value===player
-		// board[2].value===player && board[5].value===player && board[8].value===player
-
-		// diag
-		// board[0].value===player && board[4].value===player && board[8].value===player
-		// board[2].value===player && board[4].value===player && board[6].value===player
 	}
 
 	clearBoard(){
@@ -151,13 +137,13 @@ class TicTacToe extends Component {
 		  <main className="tic-tac-toe">
 			  <h1>TIC TAC TOE
 				  {winner ? (
-				    <span>
-					<span style={{color: 'red', 'text-transform': 'capitalize'}}>{winner ? ` (${winner} Wins!) ` : ''}</span>
-					<input type="button" onClick={() => this.handleClick('clear')} value={`new game`} defaultValue={`new game`} />
-					</span>
-				  ) : (
-					''
-				  )
+						<span>
+							<span style={{color: 'red', 'text-transform': 'capitalize'}}>{winner ? ` (${winner} Wins!) ` : ''}</span>
+							<input type="button" onClick={() => this.handleClick('clear')} value={`new game`} defaultValue={`new game`} />
+						</span>
+					  ) : (
+						''
+					  )
 				  }
 
 			  </h1>

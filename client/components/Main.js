@@ -14,12 +14,9 @@ class Main extends Component {
 	render() {
 		return (
 		  <main>
-			  <h1>MAIN</h1>
-			  <i class="fab fa-accessible-icon"></i>
+			  <h1>HOME</h1>
 			  <i class="fas fa-camera-retro"></i>
 			  <i class="fas fa-user"></i>
-			  <i class="far fa-user"></i>
-			  <i class="fab fa-github-square"></i>
 		  </main>
 		);
 	}
