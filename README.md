@@ -7,10 +7,6 @@ Flexible enough to be customized for more complex production applications or jus
 
 This and all my react projects use ES6. https://babeljs.io/blog/2015/06/07/react-on-es6-plus
 
-http://meme.alicechuang.com/
-
-![](https://github.com/AliceWonderland/Giphy-App/blob/master/public/assets/imgs/giphy-app.png)
-
 # Packages
 Check out `package.json` for a full list
 
