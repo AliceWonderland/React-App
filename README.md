@@ -51,10 +51,10 @@ Sequelize
 
 # Pre-Installation (MacOSX)
 * Install Node.js
-* Install Postgres.app for your OS https://www.postgresql.org/download/
+* Install Postgres.app for your OS https://postgresapp.com/downloads.html (Postgress App by Heroku)
 * Install Postico.app to manage your PG databases (optional) https://eggerapps.at/postico/
-* Use PSQL in Terminal `create database "react-app";` or Postico to create database `react-app` in Postgres
 * Start Postgres. Make sure it's running by checking the upper right of your deskop for the icon.
+* Add CLI Tools here https://postgresapp.com/documentation/cli-tools.html
 
 # Installation
 Fork `https://github.com/AliceWonderland/React-App.git` to you Github Account
@@ -63,7 +63,7 @@ From Command Line Terminal:
 * `cd React-App`
 * run `npm install`
 * run `npm run start`
-* browse to http://localhost:7000/ in web browser
+* browse to http://localhost:4000/ in web browser
 
 #### Create Your Own Skeleton
 Make sure Git and Node are installed. Make sure you have an account on Github.
