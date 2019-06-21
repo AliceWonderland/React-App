@@ -136,6 +136,7 @@ class TicTacToe extends Component {
 		return (
 		  <main className="tic-tac-toe">
 			  <h1>TIC TAC TOE
+				  <p>Click any square to begin playing against the bot!</p>
 				  {winner ? (
 						<span>
 							<span style={{color: 'red', 'text-transform': 'capitalize'}}>{winner ? ` (${winner} Wins!) ` : ''}</span>
