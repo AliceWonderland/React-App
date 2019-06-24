@@ -9,8 +9,8 @@ const Sequelize = require('sequelize');
 const pkg = require('../package.json');
 
 const dbName = process.env.DATABASE_NAME || pkg.database;
-// const connectionString = process.env.DATABASE_URL || `postgres://alice:test@localhost:5432/${dbName}`;
 const connectionString = process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`;
+// const connectionString = process.env.DATABASE_URL || `postgres://alice:test@localhost:5432/${dbName}`;
 
 console.log(chalk.yellow(`Opening database connection to ${connectionString}`));
 
@@ -49,3 +49,5 @@ function sync(force=false, retries=0, maxRetries=5) { //use force=true to drop a
 }
 
 db.didSync = sync();
+
+// Note: To seed db, run node seed. See package.json

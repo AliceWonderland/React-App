@@ -12,7 +12,7 @@ api.get('/test', (req, res) => res.send('test api'));
 // STUDENTS
 // GET ALL
 api.get('/students', (req, res, next) => {
-	Students.findAll({ include: [ Campuses ], order: '"firstName" ASC' })
+	Students.findAll({ include: [ Campuses ], order: [['id', 'DESC']] })
 	.then(function(students) {
 		// console.log(JSON.stringify(students));
 		res.json(students);
@@ -142,7 +142,7 @@ api.delete('/students/:studentId', (req, res, next) => {
 // CAMPUS
 // GET ALL
 api.get('/campuses', (req, res, next) => {
-	Campuses.findAll({ include: [ Students ], order: '"name" ASC' })
+	Campuses.findAll({ include: [ Students ], order: [['name', 'ASC']] })
 	.then(campuses=>{
 		res.json(campuses);
 	})
@@ -172,7 +172,7 @@ api.get('/campuses/:campusId/students', (req, res, next) => {
 
 	if(!Number(campusId)){res.sendStatus(500);}
 	else{
-		Students.findAll({where:{campusId:campusId},include: [ Campuses ], order: '"firstName" ASC'})
+		Students.findAll({where:{campusId:campusId},include: [ Campuses ], order: [['firstName', 'ASC']]})
 		.then(function (data) {
 			if(data){res.json(data);}
 			else{
